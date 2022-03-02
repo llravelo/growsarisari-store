@@ -40,8 +40,10 @@
       "warn",
       "always",
       {
+        "ts": "never",
         "tsx": "never",
-        "ts": "never"
+        "js": "never",
+        "jsx": "never"
       }
     ]
   }
