@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/growsarisari-store/static/css/main.26ddbf6c.css",
-    "main.js": "/growsarisari-store/static/js/main.588b775a.js",
+    "main.css": "/growsarisari-store/static/css/main.6e9be46e.css",
+    "main.js": "/growsarisari-store/static/js/main.af8a1758.js",
     "static/js/787.8fabd04c.chunk.js": "/growsarisari-store/static/js/787.8fabd04c.chunk.js",
     "index.html": "/growsarisari-store/index.html",
-    "main.26ddbf6c.css.map": "/growsarisari-store/static/css/main.26ddbf6c.css.map",
-    "main.588b775a.js.map": "/growsarisari-store/static/js/main.588b775a.js.map",
+    "main.6e9be46e.css.map": "/growsarisari-store/static/css/main.6e9be46e.css.map",
+    "main.af8a1758.js.map": "/growsarisari-store/static/js/main.af8a1758.js.map",
     "787.8fabd04c.chunk.js.map": "/growsarisari-store/static/js/787.8fabd04c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.26ddbf6c.css",
-    "static/js/main.588b775a.js"
+    "static/css/main.6e9be46e.css",
+    "static/js/main.af8a1758.js"
   ]
 }
