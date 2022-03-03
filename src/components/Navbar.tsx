@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { ShoppingCartIcon, UserCircleIcon } from '@heroicons/react/outline';
+import { ShoppingCartIcon } from '@heroicons/react/outline';
+import { UserCircleIcon } from '@heroicons/react/solid';
 import { Pages } from '../App';
 
 const LogoContainer = styled.div`
