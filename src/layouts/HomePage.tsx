@@ -1,5 +1,12 @@
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+  height: 100%;
+`;
+
 function HomePage() {
-  return <div>HomePage</div>;
+  return <Container>HomePage</Container>;
 }
 
 export default HomePage;
