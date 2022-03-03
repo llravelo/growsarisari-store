@@ -1,33 +1,29 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import Navbar from './components/Navbar';
 import HomePage from './layouts/HomePage';
 import ShoppingCart from './layouts/ShoppingCart';
 
-const HOME_PAGE: string = 'home';
-const CART_PAGE: string = 'cart';
+export enum Pages {
+  HOME_PAGE,
+  CART_PAGE
+}
 
-const Container = styled.div``;
-
-const Button = styled.div``;
+const Container = styled.div`
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+`;
 
 function App() {
-  const [page, setPage] = useState<string>(HOME_PAGE);
+  const [page, setPage] = useState<Pages>(Pages.HOME_PAGE);
 
   return (
     <Container>
-      <Button
-        onClick={() => {
-          if (page === HOME_PAGE) {
-            setPage(CART_PAGE);
-            return;
-          }
-          setPage(HOME_PAGE);
-        }}
-      >
-        Click me!
-      </Button>
-      {page === HOME_PAGE && <HomePage />}
-      {page === CART_PAGE && <ShoppingCart />}
+      <Navbar setPage={setPage} />
+      {page === Pages.HOME_PAGE && <HomePage />}
+      {page === Pages.CART_PAGE && <ShoppingCart />}
     </Container>
   );
 }
