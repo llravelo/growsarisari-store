@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* This example requires Tailwind CSS v2.0+ */
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
