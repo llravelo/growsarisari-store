@@ -45,6 +45,10 @@
         "js": "never",
         "jsx": "never"
       }
-    ]
+    ],
+    "no-unused-vars": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-shadow": ["error"]
   }
 }
