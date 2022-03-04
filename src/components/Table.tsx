@@ -1,24 +1,10 @@
-const items = [
-  {
-    id: '11551',
-    display_name: '555 Sardines in Tomato Sauce with Chili Can - 155g',
-    barcode: 748485200026,
-    price: 15.26,
-    brand: '555',
-    category: 'Canned Seafood'
-  },
-  {
-    id: '11552',
-    display_name: '555 Sardines in Tomato Sauce Can - 155g',
-    barcode: 748485200019,
-    price: 15.47,
-    brand: '555',
-    category: 'Canned Seafood'
-  }
-  // More items...
-];
+import { Product } from '../types/Products';
 
-function Table() {
+interface TableProps {
+  data: Product[];
+}
+
+function Table({ data }: TableProps) {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -57,7 +43,7 @@ function Table() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {items.map((item) => (
+                {data.map((item) => (
                   <tr key={item.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="text-sm font-medium text-gray-900">{item.display_name}</div>

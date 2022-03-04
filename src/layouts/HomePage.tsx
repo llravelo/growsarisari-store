@@ -1,14 +1,22 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Searchbar from '../components/Searchbar';
 import Table from '../components/Table';
+import ProductContext from '../context/ProductContext';
+import { Product, ProductContextType } from '../types/Products';
 
 function HomePage() {
   const [searchKey, setSearchKey] = useState<string>('');
+  const [data, setData] = useState<Product[]>([]);
+  const { getFilteredData } = useContext(ProductContext) as ProductContextType;
 
   const onSearch = (value: string) => {
-    // eslint-disable-next-line no-console
-    console.log(value);
+    setData(getFilteredData(value));
   };
+
+  useEffect(() => {
+    // eslint-disable-next-line no-console
+    console.log(data);
+  }, [data]);
 
   return (
     <>
@@ -20,7 +28,7 @@ function HomePage() {
         </div>
       </div>
       <div className="pr-6 pl-6">
-        <Table />
+        <Table data={data} />
       </div>
     </>
   );
