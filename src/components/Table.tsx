@@ -1,19 +1,24 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* This example requires Tailwind CSS v2.0+ */
-const people = [
+const items = [
   {
-    name: 'Jane Cooper',
-    title: 'Regional Paradigm Technician',
-    department: 'Optimization',
-    role: 'Admin',
-    email: 'jane.cooper@example.com',
-    image:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60'
+    id: '11551',
+    display_name: '555 Sardines in Tomato Sauce with Chili Can - 155g',
+    barcode: 748485200026,
+    price: 15.26,
+    brand: '555',
+    category: 'Canned Seafood'
+  },
+  {
+    id: '11552',
+    display_name: '555 Sardines in Tomato Sauce Can - 155g',
+    barcode: 748485200019,
+    price: 15.47,
+    brand: '555',
+    category: 'Canned Seafood'
   }
-  // More people...
+  // More items...
 ];
 
-export default function Example() {
+function Table() {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -32,19 +37,19 @@ export default function Example() {
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Title
+                    Brand
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Status
+                    Category
                   </th>
                   <th
                     scope="col"
                     className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Role
+                    Price
                   </th>
                   <th scope="col" className="relative px-6 py-3">
                     <span className="sr-only">Edit</span>
@@ -52,35 +57,24 @@ export default function Example() {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {people.map((person) => (
-                  <tr key={person.email}>
+                {items.map((item) => (
+                  <tr key={item.id}>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0 h-10 w-10">
-                          <img className="h-10 w-10 rounded-full" src={person.image} alt="" />
-                        </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">{person.name}</div>
-                          <div className="text-sm text-gray-500">{person.email}</div>
-                        </div>
-                      </div>
+                      <div className="text-sm font-medium text-gray-900">{item.display_name}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{person.title}</div>
-                      <div className="text-sm text-gray-500">{person.department}</div>
+                      <div className="text-sm text-gray-900">{item.brand}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                      <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Active
-                      </span>
+                      <div className="text-sm text-gray-900">{item.category}</div>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {person.role}
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="text-sm text-gray-900">{item.price}</div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                        Edit
-                      </a>
+                      <div className="text-indigo-600 hover:text-indigo-900 hover:cursor-pointer select-none">
+                        Add to Cart
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -92,3 +86,5 @@ export default function Example() {
     </div>
   );
 }
+
+export default Table;
