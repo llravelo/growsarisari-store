@@ -1,15 +1,8 @@
 import React, { Fragment } from 'react';
-import styled from 'styled-components';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { ShoppingCartIcon } from '@heroicons/react/outline';
 import { UserCircleIcon } from '@heroicons/react/solid';
 import { Pages } from '../App';
-
-const LogoContainer = styled.div`
-  &:hover {
-    cursor: pointer;
-  }
-`;
 
 interface NavbarProps {
   setPage: React.Dispatch<React.SetStateAction<Pages>>;
@@ -26,7 +19,8 @@ function Navbar({ setPage }: NavbarProps) {
         <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
           <div className="relative flex items-center justify-between h-16">
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-              <LogoContainer
+              <button
+                type="button"
                 onClick={() => setPage(Pages.HOME_PAGE)}
                 className="flex-shrink-0 flex items-center"
               >
@@ -35,7 +29,7 @@ function Navbar({ setPage }: NavbarProps) {
                   src="https://growsari.com/wp-content/uploads//2021/01/Logo.svg"
                   alt="GrowSariSari"
                 />
-              </LogoContainer>
+              </button>
             </div>
             <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <button
