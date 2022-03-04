@@ -22,8 +22,10 @@ function App() {
   return (
     <Container>
       <Navbar setPage={setPage} />
-      {page === Pages.HOME_PAGE && <HomePage />}
-      {page === Pages.CART_PAGE && <ShoppingCart />}
+      <div className="h-full flex flex-col p-6 bg-gray-100">
+        {page === Pages.HOME_PAGE && <HomePage />}
+        {page === Pages.CART_PAGE && <ShoppingCart />}
+      </div>
     </Container>
   );
 }

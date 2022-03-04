@@ -1,13 +1,5 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import Table from '../components/Table';
-
-const Container = styled.div`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem;
-`;
 
 function HomePage() {
   const [searchKey, setSearchKey] = useState<string>('');
@@ -18,7 +10,7 @@ function HomePage() {
   }
 
   return (
-    <Container>
+    <>
       <div className="flex flex-row justify-center items-center">
         <div className="flex justify-center">
           <div className="mb-3 xl:w-96">
@@ -61,7 +53,7 @@ function HomePage() {
       <div className="pr-6 pl-6">
         <Table />
       </div>
-    </Container>
+    </>
   );
 }
 
