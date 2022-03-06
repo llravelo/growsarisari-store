@@ -18,6 +18,7 @@ interface TableProps {
 
 function Table({ headers, data, hasEdit, editFn = () => {} }: TableProps) {
   const editIndex = headers.findIndex((header) => header === editHeader);
+  const colSpan = editIndex !== -1 ? headers.length : headers.length - 1;
 
   return (
     <div className="flex flex-col">
@@ -43,6 +44,16 @@ function Table({ headers, data, hasEdit, editFn = () => {} }: TableProps) {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
+                {data.length <= 0 && (
+                  <tr>
+                    <td
+                      className="px-6 py-4 whitespace-nowrap text-center italic"
+                      colSpan={colSpan}
+                    >
+                      No Data
+                    </td>
+                  </tr>
+                )}
                 {data.map((columns) => (
                   <tr>
                     {columns.map((cell, i) => {
