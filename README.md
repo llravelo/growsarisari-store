@@ -1,46 +1,51 @@
-# Getting Started with Create React App
+# Growsari FE Demonstration Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Github Pages](https://llravelo.github.io/growsarisari-store/)
 
-## Available Scripts
+## Summary
+I was tasked to create a simple web app for diplaying a list of products, adding them to the shopping cart, and viewing final list of items at the end. For this project, I mainly used 4 basic components in displaying and interacting with data. The web app consists of 2 different views, both of which can be accessed through the navbar.
 
-In the project directory, you can run:
+### Table
+  I reused the table component for data display in both product list and shopping cart, adding support for basic cell edit button. Moreover, the table also had basic coverage for no data.
 
-### `yarn start`
+### Navbar
+  The navbar was mainly used for switching between product list and shopping cart pages. Clicking the cart icon switches to shopping cart view while clicking the growsari icon switches to product list view.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Searchbar
+  The products list contained a lengthy list of 723 items. Navigating through such data presents challenges for the end-user. The easiest way this task can be simplified to the user is by having a search bar. A basic case-insensitive keyword matching algorithm was used, matching search key with name, brand, or category.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+###  Filter Button
+  In conjunction with search, filter button also acts to help ease the navigation of big table data. In this case, it was used to filter brand and category. Filter buttons used a popover button component and were placed at the headers so actions are applied close to context.
 
-### `yarn test`
+  Even then, category and brand data were still too many for user to effectively navigate so another search was included in the component to filter these data.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Potential Features
+For this demo, development time and scope was limited. Some features can be included if this were to become a full-fledged project.
 
-### `yarn build`
+1. Checkout Page
+2. Use of Card components for Cart Page instead of table.
+3. Product Details View
+4. Table/Grid view toggle for product list (with pagination)
+5. Lazy loading mechanism for big data (i.e. Products) > Research Item
+6. User Auth
+7.  Purchase History
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Unhandled Edge Cases/Points for Improvement
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Unhandled Edge Cases
+1. Popover filter state is not bound to the selected layout filters, so a UI bug can happen where selected filters in popover are not exactly the current selected filters.
+2. There was also no pagination and sorting in the table in the current implementation.
+3. Add to Cart functionality is too basic, there is no support for adding multiple items at once or updating the quantity in cart page.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Points for Improvement
+1. There were no unit tests in the project for this demo. They could've been included.
+2. Styling was also pretty basic and incoherent. Theming could be applied here too.
 
-### `yarn eject`
+## Setup Guide
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+This project was developed with `yarn 3.2.0`, however, it should still be interoperable with a recent node/npm version.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. `npm install` or `yarn install`
+2. `npm start` or `yarn start`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Go to `http://localhost:3000/growsarisari-store/`
