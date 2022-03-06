@@ -51,7 +51,12 @@ function Table({ headers, data, hasEdit, editFn = () => {} }: TableProps) {
                       return (
                         <td className="px-6 py-4 whitespace-nowrap">
                           {i !== editIndex && (
-                            <div className="text-sm font-medium text-gray-900">{cell}</div>
+                            <div
+                              title={cell.toString()}
+                              className="text-sm font-medium text-gray-900 max-w-sm overflow-hidden text-ellipsis"
+                            >
+                              {cell}
+                            </div>
                           )}
                           {i === editIndex && (
                             <button

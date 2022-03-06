@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import Searchbar from '../components/Searchbar';
 import Table, { editHeader, editCell, tableData } from '../components/Table';
 import ProductContext from '../context/ProductContext';
-import { addToCart } from '../redux/cart/actions';
+import { addToCart } from '../api/cart/actions';
 import { Product, ProductContextType } from '../types/Products';
 
 function HomePage() {
