@@ -1,22 +1,42 @@
 import { useContext, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Searchbar from '../components/Searchbar';
-import Table from '../components/Table';
+import Table, { editHeader, editCell, tableData } from '../components/Table';
 import ProductContext from '../context/ProductContext';
+import { addToCart } from '../redux/cart/actions';
 import { Product, ProductContextType } from '../types/Products';
 
 function HomePage() {
+  const dispatch = useDispatch();
   const [searchKey, setSearchKey] = useState<string>('');
-  const [data, setData] = useState<Product[]>([]);
+  const [productList, setProductList] = useState<Product[]>([]);
+  const [data, setData] = useState<tableData>([]);
   const { getFilteredData } = useContext(ProductContext) as ProductContextType;
+  const headers = ['name', 'brand', 'category', 'price', editHeader];
 
   const onSearch = (value: string) => {
-    setData(getFilteredData(value));
+    setProductList(getFilteredData(value));
+  };
+
+  const onAdd = (productId: number) => {
+    dispatch(addToCart(productId));
   };
 
   useEffect(() => {
-    // eslint-disable-next-line no-console
-    console.log(data);
-  }, [data]);
+    const newTableData = productList.reduce<tableData>((arr, cur) => {
+      return [
+        ...arr,
+        [
+          cur.display_name,
+          cur.brand,
+          cur.category,
+          cur.price,
+          { payload: cur.id, text: 'Add to Cart' } as editCell
+        ]
+      ];
+    }, []);
+    setData(newTableData);
+  }, [productList]);
 
   return (
     <>
@@ -28,7 +48,7 @@ function HomePage() {
         </div>
       </div>
       <div className="pr-6 pl-6">
-        <Table data={data} />
+        <Table headers={headers} data={data} hasEdit editFn={onAdd} />
       </div>
     </>
   );

@@ -1,10 +1,24 @@
-import { Product } from '../types/Products';
+import PropTypes from 'prop-types';
+
+export type editCell = {
+  payload: any;
+  text: string | number;
+};
+
+export type tableData = Array<Array<string | number | editCell>>;
+
+export const editHeader = 'EDIT';
 
 interface TableProps {
-  data: Product[];
+  headers: string[];
+  data: tableData;
+  hasEdit?: boolean;
+  editFn?: (...args: any[]) => void;
 }
 
-function Table({ data }: TableProps) {
+function Table({ headers, data, hasEdit, editFn = () => {} }: TableProps) {
+  const editIndex = headers.findIndex((header) => header === editHeader);
+
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -13,55 +27,44 @@ function Table({ data }: TableProps) {
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Name
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Brand
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Category
-                  </th>
-                  <th
-                    scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                  >
-                    Price
-                  </th>
-                  <th scope="col" className="relative px-6 py-3">
-                    <span className="sr-only">Edit</span>
-                  </th>
+                  {headers.map((header, i) => {
+                    if (i === editIndex && !hasEdit) return null;
+
+                    return (
+                      <th
+                        key={header}
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        {header}
+                      </th>
+                    );
+                  })}
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {data.map((item) => (
-                  <tr key={item.id}>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">{item.display_name}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{item.brand}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{item.category}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{item.price}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <div className="text-indigo-600 hover:text-indigo-900 hover:cursor-pointer select-none">
-                        Add to Cart
-                      </div>
-                    </td>
+                {data.map((columns) => (
+                  <tr>
+                    {columns.map((cell, i) => {
+                      if (i === editIndex && !hasEdit) return null;
+
+                      return (
+                        <td className="px-6 py-4 whitespace-nowrap">
+                          {i !== editIndex && (
+                            <div className="text-sm font-medium text-gray-900">{cell}</div>
+                          )}
+                          {i === editIndex && (
+                            <button
+                              type="button"
+                              onClick={() => editFn((cell as editCell)?.payload)}
+                              className="text-indigo-600 hover:text-indigo-900 select-none"
+                            >
+                              {(cell as editCell)?.text}
+                            </button>
+                          )}
+                        </td>
+                      );
+                    })}
                   </tr>
                 ))}
               </tbody>
@@ -72,5 +75,17 @@ function Table({ data }: TableProps) {
     </div>
   );
 }
+
+Table.propTypes = {
+  headers: PropTypes.arrayOf(PropTypes.string).isRequired,
+  data: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.any)).isRequired,
+  hasEdit: PropTypes.bool,
+  editFn: PropTypes.func
+};
+
+Table.defaultProps = {
+  hasEdit: false,
+  editFn: () => {}
+};
 
 export default Table;
