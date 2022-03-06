@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Searchbar from '../components/Searchbar';
-import Table, { editHeader, editCell, tableData } from '../components/Table';
+import Table, { editHeader, editCell, filterHeader, tableData } from '../components/Table';
 import ProductContext from '../context/ProductContext';
 import { addToCart } from '../api/cart/actions';
 import { Product, ProductContextType } from '../types/Products';
@@ -11,12 +11,34 @@ function HomePage() {
   const [searchKey, setSearchKey] = useState<string>('');
   const [productList, setProductList] = useState<Product[]>([]);
   const [data, setData] = useState<tableData>([]);
-  const [isSearched, setIsSearched] = useState(false);
-  const { getFilteredData } = useContext(ProductContext) as ProductContextType;
-  const headers = ['name', 'brand', 'category', 'price', editHeader];
+  const [isSearched, setIsSearched] = useState<boolean>(false);
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const { getFilteredData, getBrands, getCategories } = useContext(
+    ProductContext
+  ) as ProductContextType;
+  const headers = [
+    'name',
+    {
+      text: 'brand',
+      options: getBrands(),
+      cb: (selected: string[]) => {
+        setSelectedBrands(selected);
+      }
+    } as filterHeader,
+    {
+      text: 'category',
+      options: getCategories(),
+      cb: (selected: string[]) => {
+        setSelectedCategories(selected);
+      }
+    } as filterHeader,
+    'price',
+    editHeader
+  ];
 
   const onSearch = (value: string) => {
-    setProductList(getFilteredData(value));
+    setProductList(getFilteredData(value, selectedBrands, selectedCategories));
     setIsSearched(true);
   };
 
@@ -39,6 +61,10 @@ function HomePage() {
     }, []);
     setData(newTableData);
   }, [productList]);
+
+  useEffect(() => {
+    setProductList(getFilteredData(searchKey, selectedBrands, selectedCategories));
+  }, [selectedBrands, selectedCategories]);
 
   return (
     <>

@@ -1,8 +1,15 @@
 import PropTypes from 'prop-types';
+import FilterButton from './FilterButton';
 
 export type editCell = {
   payload: any;
   text: string | number;
+};
+
+export type filterHeader = {
+  text: string;
+  options: string[];
+  cb: (selectedOptions: string[]) => void;
 };
 
 export type tableData = Array<Array<string | number | editCell>>;
@@ -10,7 +17,7 @@ export type tableData = Array<Array<string | number | editCell>>;
 export const editHeader = 'EDIT';
 
 interface TableProps {
-  headers: string[];
+  headers: Array<string | filterHeader>;
   data: tableData;
   hasEdit?: boolean;
   editFn?: (...args: any[]) => void;
@@ -30,14 +37,25 @@ function Table({ headers, data, hasEdit, editFn = () => {} }: TableProps) {
                 <tr>
                   {headers.map((header, i) => {
                     if (i === editIndex && !hasEdit) return null;
-
+                    if (typeof header !== 'string') {
+                      return (
+                        <th
+                          key={header.text}
+                          scope="col"
+                          className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          <div>{header.text}</div>
+                          <FilterButton options={header.options} cb={header.cb} />
+                        </th>
+                      );
+                    }
                     return (
                       <th
                         key={header}
                         scope="col"
                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
-                        {header}
+                        <div>{header}</div>
                       </th>
                     );
                   })}
