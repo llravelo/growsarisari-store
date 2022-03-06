@@ -11,11 +11,13 @@ function HomePage() {
   const [searchKey, setSearchKey] = useState<string>('');
   const [productList, setProductList] = useState<Product[]>([]);
   const [data, setData] = useState<tableData>([]);
+  const [isSearched, setIsSearched] = useState(false);
   const { getFilteredData } = useContext(ProductContext) as ProductContextType;
   const headers = ['name', 'brand', 'category', 'price', editHeader];
 
   const onSearch = (value: string) => {
     setProductList(getFilteredData(value));
+    setIsSearched(true);
   };
 
   const onAdd = (productId: number) => {
@@ -48,7 +50,7 @@ function HomePage() {
         </div>
       </div>
       <div className="pr-6 pl-6">
-        <Table headers={headers} data={data} hasEdit editFn={onAdd} />
+        {isSearched && <Table headers={headers} data={data} hasEdit editFn={onAdd} />}
       </div>
     </>
   );
