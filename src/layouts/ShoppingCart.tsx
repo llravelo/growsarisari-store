@@ -40,7 +40,9 @@ function ShoppingCart() {
 
   return (
     <div className="pr-6 pl-6">
-      <Table headers={headers} data={data} hasEdit editFn={onRemove} />
+      <div className="text-xl mb-4">Cart</div>
+      {data.length > 0 && <Table headers={headers} data={data} hasEdit editFn={onRemove} />}
+      {data.length <= 0 && <div className="italic">Your cart is currently empty!</div>}
     </div>
   );
 }
