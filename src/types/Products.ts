@@ -14,4 +14,6 @@ export interface ProductContextType {
     categoryFilters?: string[]
   ) => Product[];
   getProductById: (productId: number) => Product | undefined;
+  getBrands: () => string[];
+  getCategories: () => string[];
 }
